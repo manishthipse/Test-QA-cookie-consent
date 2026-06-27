@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Site — GTM Page</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N8M7CRQR');
+  </script>
+  <!-- End Google Tag Manager -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8M7CRQR"
+            height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <h1>Cookie Consent Test Site — GTM Page</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gtm-page.html">GTM Page</a>
+    <a href="spa-page.html">SPA Page</a>
+    <a href="iframe-page.html">Iframe Page</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </nav>
+  <div class="warning">
+    <strong>&#9888; GTM container is installed.</strong>
+    Tags configured inside GTM will fire automatically until you add
+    enforcement. Use this page to test GTM-specific enforcement.
+  </div>
+  <h2>What loads on this page</h2>
+  <ul>
+    <li>Google Tag Manager container (GTM-N8M7CRQR)</li>
+    <li>Whatever tags are configured inside the GTM dashboard (see Part 5)</li>
+  </ul>
+  <h2>Simulated e-commerce event</h2>
+  <button onclick="simulatePurchase()">Fire purchase event</button>
+  <script>
+    function simulatePurchase() {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'purchase',
+        value: 2499,
+        currency: 'INR',
+        product: 'Test Product'
+      });
+      console.log('Purchase event pushed to dataLayer');
+    }
+  </script>
+  <footer>Cookie Consent Test Site</footer>
+  <script src="assets/test-helpers.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Site — SPA Page</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <h1>Cookie Consent Test Site — SPA-Style Page</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gtm-page.html">GTM Page</a>
+    <a href="spa-page.html">SPA Page</a>
+    <a href="iframe-page.html">Iframe Page</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </nav>
+  <div class="warning">
+    <strong>&#9888; Scripts load on button click.</strong>
+    This simulates an SPA where services initialise only after some
+    user action. Use this page to test API-based enforcement.
+  </div>
+  <h2>Load analytics on demand</h2>
+  <p>Click the button to dynamically load Google Analytics:</p>
+  <button id="loadAnalytics">Load Google Analytics</button>
+  <button id="loadMarketing">Load Marketing Script</button>
+  <script>
+    // Dynamically load GA4 when user clicks
+    document.getElementById('loadAnalytics').addEventListener('click', function() {
+      if (window._gaLoaded) {
+        alert('Already loaded'); return;
+      }
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-89RWJTCPLZ';
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function() { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-89RWJTCPLZ');
+      window._gaLoaded = true;
+      console.log('GA loaded dynamically');
+    });
+    // Dynamically set marketing cookies
+    document.getElementById('loadMarketing').addEventListener('click', function() {
+      document.cookie = 'campaign_id=spring2026; path=/; max-age=3600';
+      document.cookie = 'ab_variant=B; path=/; max-age=3600';
+      console.log('Marketing cookies set');
+    });
+  </script>
+  <footer>Cookie Consent Test Site</footer>
+  <script src="assets/test-helpers.js"></script>
+</body>
+</html>

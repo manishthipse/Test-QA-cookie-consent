@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Ensure HTML is not cached so your changes show up immediately
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
