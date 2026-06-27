@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Site — Homepage</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="seqrite-config.css"/>
+  <script data-config="seqriteConfig" type="application/javascript" src="seqrite.js"></script>
+  <script type="application/javascript" src="seqrite-config.js"></script>
+  <script defer src="seqrite-enforcement.js"></script>
+  <!-- Google Analytics 4 — blocked until "analytics" consent granted -->
+  <script type="text/plain" data-type="text/javascript" data-name="analytics"
+          data-src="https://www.googletagmanager.com/gtag/js?id=G-89RWJTCPLZ">
+  </script>
+  <script type="text/plain" data-type="text/javascript" data-name="analytics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-89RWJTCPLZ');
+  </script>
+  <!-- Functional cookies — blocked until "functional" consent granted -->
+  <script type="text/plain" data-type="text/javascript" data-name="functional">
+    document.cookie = 'user_prefs={"lang":"en","theme":"light"}; path=/; max-age=86400';
+    document.cookie = 'session_id=sess-abc123xyz; path=/; max-age=1800';
+    console.log('Functional cookies set: user_prefs, session_id');
+  </script>
+  <!-- Marketing cookies — blocked until "marketing" consent granted -->
+  <script type="text/plain" data-type="text/javascript" data-name="marketing">
+    document.cookie = '_fbp=fb.1.' + Date.now() + '.1234567890; path=/; max-age=7776000';
+    document.cookie = '_gcl_au=1.1.987654321.' + Date.now() + '; path=/; max-age=7776000';
+    console.log('Marketing cookies set: _fbp (Facebook Pixel), _gcl_au (Google Ads)');
+  </script>
+  <!-- Fake marketing pixel — blocked until "others" consent granted -->
+  <script type="text/plain" data-type="text/javascript" data-name="others">
+    document.cookie = 'marketing_id=test-user-123; path=/; max-age=3600';
+    console.log('Marketing pixel inline script executed');
+  </script>
+</head>
+<body>
+  <h1>Cookie Consent Test Site — Homepage</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gtm-page.html">GTM Page</a>
+    <a href="spa-page.html">SPA Page</a>
+    <a href="iframe-page.html">Iframe Page</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </nav>
+  <div class="warning">
+    <strong>&#9888; Seqrite enforcement active.</strong>
+    Consent banner is shown and scripts are blocked until the matching category is accepted.
+  </div>
+  <h2>What loads on this page</h2>
+  <ul>
+    <li><strong>[Analytics]</strong> GA4 external + inline init — blocked until analytics consent</li>
+    <li>Tracking image pixel (see below)</li>
+    <li><strong>[Functional]</strong> <code>user_prefs</code> — stores language &amp; theme preference (1 day)</li>
+    <li><strong>[Functional]</strong> <code>session_id</code> — maintains session state (30 min)</li>
+    <li><strong>[Marketing]</strong> <code>_fbp</code> — Facebook Pixel retargeting (90 days)</li>
+    <li><strong>[Marketing]</strong> <code>_gcl_au</code> — Google Ads conversion linker (90 days)</li>
+    <li><strong>[Others]</strong> <code>marketing_id</code> — fake marketing pixel (1 hour)</li>
+  </ul>
+  <h2>Tracking image pixel</h2>
+  <img src="https://www.google-analytics.com/collect?v=1&t=event&tid=G-89RWJTCPLZ&cid=555"
+       width="1" height="1" alt="">
+  <footer>
+    Cookie Consent Test Site — Developer testing environment only.
+  </footer>
+  <script src="assets/test-helpers.js"></script>
+</body>
+</html>

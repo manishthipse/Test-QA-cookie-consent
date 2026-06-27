@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Site — Privacy Policy</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <h1>Privacy Policy</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gtm-page.html">GTM Page</a>
+    <a href="spa-page.html">SPA Page</a>
+    <a href="iframe-page.html">Iframe Page</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </nav>
+  <p>This is a test site. No real data is collected for any real purpose.</p>
+  <h2>Manage your cookie preferences</h2>
+  <p>
+    Once consent enforcement is wired up, the link below should
+    reopen the consent banner.
+  </p>
+  <a href="#" id="openPrefs">Manage Cookie Preferences</a>
+  <script>
+    document.getElementById('openPrefs').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.PrivacyConsent && PrivacyConsent.show) {
+        PrivacyConsent.show();
+      } else {
+        alert('PrivacyConsent wrapper not loaded yet.');
+      }
+    });
+  </script>
+  <footer>Cookie Consent Test Site</footer>
+  <script src="assets/test-helpers.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Site — Iframe Page</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <h1>Cookie Consent Test Site — Iframe Page</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gtm-page.html">GTM Page</a>
+    <a href="spa-page.html">SPA Page</a>
+    <a href="iframe-page.html">Iframe Page</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </nav>
+  <div class="warning">
+    <strong>&#9888; Iframes load on page load.</strong>
+    Both iframes below fetch third-party content and set their own cookies.
+    Use this page to test iframe-specific enforcement.
+  </div>
+  <h2>Embedded YouTube video</h2>
+  <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="YouTube video"
+    allow="encrypted-media"
+    allowfullscreen></iframe>
+  <h2>Embedded Google Map</h2>
+  <iframe width="600" height="300"
+    src="https://maps.google.com/maps?q=Pune&output=embed"
+    title="Google Map"></iframe>
+  <footer>Cookie Consent Test Site</footer>
+  <script src="assets/test-helpers.js"></script>
+</body>
+</html>
