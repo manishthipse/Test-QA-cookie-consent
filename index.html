@@ -1,71 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="english">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Test Site — Homepage</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="seqrite-config.css"/>
-  <script data-config="seqriteConfig" type="application/javascript" src="seqrite.js"></script>
-  <script type="application/javascript" src="seqrite-config.js"></script>
-  <script defer src="seqrite-enforcement.js"></script>
-  <!-- Google Analytics 4 — blocked until "analytics" consent granted -->
-  <script type="text/plain" data-type="text/javascript" data-name="analytics"
-          data-src="https://www.googletagmanager.com/gtag/js?id=G-89RWJTCPLZ">
-  </script>
-  <script type="text/plain" data-type="text/javascript" data-name="analytics">
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-89RWJTCPLZ');
-  </script>
-  <!-- Functional cookies — blocked until "functional" consent granted -->
-  <script type="text/plain" data-type="text/javascript" data-name="functional">
-    document.cookie = 'user_prefs={"lang":"en","theme":"light"}; path=/; max-age=86400';
-    document.cookie = 'session_id=sess-abc123xyz; path=/; max-age=1800';
-    console.log('Functional cookies set: user_prefs, session_id');
-  </script>
-  <!-- Marketing cookies — blocked until "marketing" consent granted -->
-  <script type="text/plain" data-type="text/javascript" data-name="marketing">
-    document.cookie = '_fbp=fb.1.' + Date.now() + '.1234567890; path=/; max-age=7776000';
-    document.cookie = '_gcl_au=1.1.987654321.' + Date.now() + '; path=/; max-age=7776000';
-    console.log('Marketing cookies set: _fbp (Facebook Pixel), _gcl_au (Google Ads)');
-  </script>
-  <!-- Fake marketing pixel — blocked until "others" consent granted -->
-  <script type="text/plain" data-type="text/javascript" data-name="others">
-    document.cookie = 'marketing_id=test-user-123; path=/; max-age=3600';
-    console.log('Marketing pixel inline script executed');
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consent Widget</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Cookie Consent Test Site — Homepage</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="gtm-page.html">GTM Page</a>
-    <a href="spa-page.html">SPA Page</a>
-    <a href="iframe-page.html">Iframe Page</a>
-    <a href="privacy-policy.html">Privacy Policy</a>
-  </nav>
-  <div class="warning">
-    <strong>&#9888; Seqrite enforcement active.</strong>
-    Consent banner is shown and scripts are blocked until the matching category is accepted.
+  <div class="widget-container">
+   	<div class="header-language-wrapper-container ">
+		<div id="language-wrapper" style="display: none;">
+		    <div class="dropdown">
+			<label for="langSelect">Language Preference <br></label>
+			<select id="langSelect"></select>
+			</div>
+		</div>  
+	</div>
+    <div class="header-container">
+      <div class="logo-area" id="logo-area"></div>
+    </div>
+    	<div class ="preview-statements">
+        <div id="consent-root">Loading consent form...</div>
+        <div id="error-message" class="error-message"></div>
+        <div id="toast"></div>
+      </div> 
+      <div class="full-width-footer-border"></div>
+      <div class="button-group" id="button-group">
+          <button class="cancel" id="cancelBtn" style="display: none;">Cancel</button>
+          <button class="submit" id="submitBtn" style="display: none;">Submit</button>
+      </div>
+    
   </div>
-  <h2>What loads on this page</h2>
-  <ul>
-    <li><strong>[Analytics]</strong> GA4 external + inline init — blocked until analytics consent</li>
-    <li>Tracking image pixel (see below)</li>
-    <li><strong>[Functional]</strong> <code>user_prefs</code> — stores language &amp; theme preference (1 day)</li>
-    <li><strong>[Functional]</strong> <code>session_id</code> — maintains session state (30 min)</li>
-    <li><strong>[Marketing]</strong> <code>_fbp</code> — Facebook Pixel retargeting (90 days)</li>
-    <li><strong>[Marketing]</strong> <code>_gcl_au</code> — Google Ads conversion linker (90 days)</li>
-    <li><strong>[Others]</strong> <code>marketing_id</code> — fake marketing pixel (1 hour)</li>
-  </ul>
-  <h2>Tracking image pixel</h2>
-  <img src="https://www.google-analytics.com/collect?v=1&t=event&tid=G-89RWJTCPLZ&cid=555"
-       width="1" height="1" alt="">
-  <footer>
-    Cookie Consent Test Site — Developer testing environment only.
-  </footer>
-  <script src="assets/test-helpers.js"></script>
+  <script>
+    // Configuration options for the consent widget
+    window.consentWidgetConfig = {
+      consentFormId: "90f85b5a-5839-4fdf-8053-cbd2f61982b8",
+      apiUrl: "https://starhealth.pre-dataprivacy.com/cpm-api/open-api/v1/consent/v1/getConsentFormById",
+      submitApiUrl: "https://starhealth.pre-dataprivacy.com/cpm-api/open-api/v1/consent/v1/createOrUpdateConsent",
+      tenantToken: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjMDE0NTczNi01MmIyLTRkMjEtOTQ2My0zZDI2NTQyMDQzZjciLCJwcm9kdWN0IjoiQ29uc2VudCBNYW5hZ21lbnQiLCJzY29wZSI6ImFjY2VzcyIsImlhdCI6MTc4MjgwNTAxMSwiZXhwIjoxNzgyODkxNDExfQ.t4HMPuIOcEWUzcTkp8XWDgUt4fAVpYehpCVHxnphKD8",
+      signatureServiceUrl: "https://starhealth.pre-dataprivacy.com/cpm-sign",
+      dataPrincipalId: [
+        {
+          key: "email",
+          value: "manish@quickheal.com"
+        }
+      ],
+      customAttributes: {
+        "ticketID": "",
+        "registration ID": ""
+      },
+      showButtons: true,
+      showLanguageDropdown: true,
+      enableCheckboxes: true,
+      enableRadioButtons: true,
+      enableDropdowns: true,
+      receivedType:"WEB"
+    };
+
+  // Function for Android WebView integration to dynamically set tenant token and data principal ID
+  // Called from Android native code before loading the consent widget
+  window.updateConsentConfig = function(token, dataPrincipalId) {
+      if (token) {
+        window.consentWidgetConfig.tenantToken = token;
+      }
+
+      if (dataPrincipalId) {
+        window.consentWidgetConfig.dataPrincipalId = dataPrincipalId;
+      }
+
+      // Dynamically load script.js only once to prevent multiple script injections
+      if (!window.scriptLoaded) {
+        const script = document.createElement('script');
+        script.src = 'script.js';
+        // SRI (Subresource Integrity) ensures script hasn't been tampered with
+        // Replace HASH_VALUE_HERE with actual SHA-384 hash of script.js
+        // Generate hash: openssl dgst -sha384 -binary script.js | openssl base64 -A
+        script.integrity = 'sha384-HASH_VALUE_HERE';
+        // crossOrigin required for SRI validation
+        script.crossOrigin = 'anonymous';
+        script.integrity = "sha384-YQ1aasibiEptXTSlcG+e4cc++qi9rbKGk3pFrePnwj6X7c3/H5IA+z8iw7te9AEO";
+        script.onload = function() {
+          window.scriptLoaded = true;
+          console.log("script.js loaded");
+        };
+        document.body.appendChild(script);
+      }
+
+      return "Config updated successfully";
+    };
+  </script>
+  
+
+<!--
+  Optional: Use custom buttons if the parent application
+  wants to control Consent Form submission and reset actions.
+
+  Note:
+  - Set `showButtons: false` in the widget configuration.
+  - Submit button calls `consentWidget.submit()`.
+  - Clear button calls `consentWidget.reset()`.
+-->
+
+<!--Example-->
+
+<!--
+<button id="parentClearBtn" style="padding:10px 16px; background:#dc2626; color:white; border:none; border-radius:6px;">
+  Clear Consent
+</button>
+<button id="parentSubmitBtn" style="padding:10px 16px; background:#16a34a; color:white; border:none; border-radius:6px;">
+  Submit Consent
+</button>
+
+<script>
+  document.getElementById("parentSubmitBtn").addEventListener("click", async () => {
+    if (!window.consentWidget) return;
+
+    const result = await window.consentWidget.submit();
+
+    console.log("Submit result:", result);
+
+    if (result.success) {
+      // navigate next page here
+      // window.location.href = "/next-page";
+    }
+  });
+
+  document.getElementById("parentClearBtn").addEventListener("click", () => {
+    if (!window.consentWidget) return;
+
+    window.consentWidget.reset();
+  });
+</script>
+-->
+<!-- 
+  Static script loading for non-Android environments
+  For Android: Comment out this line and use window.updateConsentConfig() to load script dynamically
+  SRI (Subresource Integrity) with SHA-384 hash ensures script integrity
+  Replace HASH_VALUE_HERE with actual hash generated from script.js
+  Note: SRI may not work with file:// protocol in Android WebView - test thoroughly
+-->
+<script src="script.js" integrity="sha384-YQ1aasibiEptXTSlcG+e4cc++qi9rbKGk3pFrePnwj6X7c3/H5IA+z8iw7te9AEO" crossorigin="anonymous"></script>
 </body>
 </html>
